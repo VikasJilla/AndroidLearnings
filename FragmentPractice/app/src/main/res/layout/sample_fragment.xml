@@ -4,11 +4,14 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@color/colorPrimary">
+
 <TextView
+    android:id="@+id/textView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:textSize="22dp"
     android:textColor="#FFFF"
     android:text="@string/app_name"
     />
+
 </RelativeLayout>
