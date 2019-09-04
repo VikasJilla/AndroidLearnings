@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">ServicesExample</string>
+    <string name="intentservice">IntentService</string>
+    <string name="startedservice">StartedService</string>
+    <string name="cnt_returned">returned count</string>
+</resources>
