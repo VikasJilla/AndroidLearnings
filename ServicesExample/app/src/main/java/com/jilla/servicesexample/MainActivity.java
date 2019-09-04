@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onReceive(Context context, Intent intent) {
                 int result = intent.getIntExtra("result",-10);
-                starteServeResult.setText(result+"returned result from started service");
+                starteServeResult.setText(result+" returned result from started service");
             }
         };
     }
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     public void manageIntentService(View view) {
         if(view.getTag() == null){
             Intent intent = new Intent(this,MyIntentService.class);
-            intent.putExtra("resultHandler",new MyResultHandler(null));//instead of null if we pass handler
+            intent.putExtra("resultHandler",new MyResultHandler(handler));//instead of null if we pass handler
             // then the onReceiveResult will be called on the thread to which handler was attached
             startService(intent);
             view.setTag("IntentService");
@@ -92,12 +92,7 @@ public class MainActivity extends AppCompatActivity {
             if(resultCode == 200){
                 int result = resultData.getInt("result",-10);
                 final String data = result + getApplicationContext().getString(R.string.cnt_returned);
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        intentServeResult.setText(data);
-                    }
-                });
+                intentServeResult.setText(data);
             }
         }
     }

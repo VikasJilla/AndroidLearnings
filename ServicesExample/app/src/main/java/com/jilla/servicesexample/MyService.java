@@ -8,6 +8,8 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.util.logging.Logger;
+
 // a service that is created by extending Service class runs every method on main thread - indicating that no long running
 //tasks should be done in the functions
 public class MyService extends Service {
@@ -23,7 +25,7 @@ public class MyService extends Service {
         //and the intent passed to start service will be received here
         Log.e(MyService.class.getSimpleName(),"onStartCommand is running on " + Thread.currentThread().getName());
         new BackgroundTask().execute();
-        return START_STICKY;//if this process is killed(by OS due to lack of system resources)
+        return START_NOT_STICKY;//if this process is killed(by OS due to lack of system resources)
         // after onStartCommand is started, then this flag will tell not to pass the
         //intent when the service is recreated.
     }
@@ -73,6 +75,11 @@ public class MyService extends Service {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            Log.e("MyService","onPostExecute");
+            Intent intent = new Intent();
+            intent.setAction("startedServiceResult");
+            intent.putExtra("result",200);
+            sendBroadcast(intent);
             stopSelf();//stops the service that has started this thread
         }
     }

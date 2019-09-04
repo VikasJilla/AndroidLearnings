@@ -11,7 +11,7 @@ public class MyIntentService extends IntentService { //onHandleIntent is called 
     //calling startService will deliver the intent to the onStartCommand which inturn sends the received intent to
     // intent queue, which deliver one intent at a time to onHandleIntent
 
-    MyIntentService(){
+    public MyIntentService(){
         super("ThreadName");
     }
 
