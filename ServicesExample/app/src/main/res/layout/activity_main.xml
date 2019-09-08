@@ -37,4 +37,13 @@
         android:layout_height="wrap_content"
         android:text="Hello World!"
         />
+
+    <Button
+        android:id="@+id/secondActLauncher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="launchSecondActivity"
+        android:layout_alignParentBottom="true"
+        android:text="Launch Act2"
+        />
 </RelativeLayout>

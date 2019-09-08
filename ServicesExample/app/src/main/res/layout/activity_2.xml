@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity2">
+
+    <Button
+        android:id="@+id/serviceBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="startIPCBoundService"
+        android:text="IPCBoundService"/>
+
+    <Button
+        android:id="@+id/normalBndServiceStarter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bound Service"
+        android:layout_centerInParent="true"
+        android:onClick="startBoundedService"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="sendIPCMsg"
+        android:onClick="sendMessage"
+        />
+    <Button
+        android:id="@+id/normalBndServiceStopper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/normalBndServiceStarter"
+        android:text="Stop Bound Service"
+        android:onClick="stopBoundedService"
+        android:layout_centerInParent="true"/>
+
+</RelativeLayout>

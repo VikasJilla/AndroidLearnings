@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.ResultReceiver;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,22 +40,31 @@ public class MainActivity extends AppCompatActivity {
             // it can' be recreated until it is destroyed, if you call startService without destroying it
             // onStartCommand of the service will be executed each time
             view.setTag("tag");
-            IntentFilter intentFilter = new IntentFilter();
-            intentFilter.addAction("startedServiceResult");
-            registerReceiver(broadcastReceiver,intentFilter);
         }
         else {
             Intent intent = new Intent(this,MyService.class);
             stopService(intent);
             view.setTag(null);
-            unregisterReceiver(broadcastReceiver);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("startedServiceResult");
+        registerReceiver(broadcastReceiver,intentFilter);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        unregisterReceiver(broadcastReceiver);
+        try {
+            unregisterReceiver(broadcastReceiver);
+        }catch (Exception e){
+            Log.e("MainActivity","Error occured");
+        }
     }
 
     public void manageIntentService(View view) {
@@ -63,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
             // then the onReceiveResult will be called on the thread to which handler was attached
             startService(intent);
             view.setTag("IntentService");
+
         }
         else{
             Intent in = new Intent(this,MyIntentService.class);
@@ -71,6 +83,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     Handler handler = new Handler();
+
+    public void launchSecondActivity(View view) {
+        Intent in = new Intent(this,Activity2.class);
+        startActivity(in);
+    }
 
     private class MyResultHandler extends ResultReceiver{
 
@@ -96,4 +113,41 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+    class BTask extends AsyncTask<Void,Integer,Void>{
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void[] objects) {
+            int cnt = 0;
+            while(cnt < 10){
+                cnt++;
+                try {
+                    Log.e("MyS",""+cnt);
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                publishProgress(cnt);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+            Log.e("MyServices","onProgressUpdate "+values[0]);
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            Log.e("MyServices","onPostExecuted");
+        }
+    }
 }
+

@@ -58,6 +58,7 @@ public class MyService extends Service {
                 cnt++;
                 try {
                     Thread.sleep(1000);
+                    Log.e("MyService",""+cnt);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
