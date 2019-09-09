@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/firstTypeBroadCastSender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="send Normal Broadcast"
+        android:onClick="sendNormalBroadcast"
+        />
+
+    <Button
+        android:id="@+id/actionBroadCastSender"
+        android:layout_below="@id/firstTypeBroadCastSender"
+        android:layout_marginTop="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="send broadcast using action"
+        android:onClick="sendActionBroadcast"
+        />
+
+    <Button
+        android:layout_below="@id/actionBroadCastSender"
+        android:id="@+id/dynamicBroadcastSender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="send dynamic broadcast"
+        android:onClick="sendDynamicBroadcast"
+        android:layout_marginTop="5dp"
+        />
+
+    <Button
+        android:id="@+id/orderedBroadCastSender"
+        android:layout_below="@id/dynamicBroadcastSender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="sendOrderedBroadcast"
+        android:text="send ordered broadcast"/>
+
+</RelativeLayout>
